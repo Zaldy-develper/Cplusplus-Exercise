@@ -7,5 +7,4 @@ using namespace System::Windows::Forms;
 using namespace System::IO;
 
 bool ReceiveFile(SOCKET clientSocket, String^ savePath, TextBox^ statusTextBox);
-bool sendHello(SOCKET socket, String^ greeting, TextBox^ statusTextBox); // Declaration must be 
-
+bool sendHello(SOCKET socket, String^ greeting, TextBox^ statusTextBox); 

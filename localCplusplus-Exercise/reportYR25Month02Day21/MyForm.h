@@ -343,24 +343,7 @@ namespace Project2ITProcessCommSocket {
 		}
 
 
-		/*
-		// データを受信する (Received the data)
-		int bytesRead = recv(new_socket, buffer, BUFFER_SIZE, 0);
-		if (bytesRead == SOCKET_ERROR) {
-			//std::cerr << "recv failed" << std::endl;
-			StatusUpdate("Received Failed.");
-			ReceiveStatus("Received Failed.");
-			closesocket(new_socket);
-			WSACleanup();
-			return;
-		}
-		else {
-			buffer[bytesRead] = '\0'; // Null-terminate the received data
-			// std::cout << "Server received: " << buffer << std::endl;
-			//MessageBox::Show("Server received: ", "更新情報", MessageBoxButtons::OK, MessageBoxIcon::Information);
-
-		}
-		*/
+		
 
 		/* TESTING*/
 		// Send "Hello world" to the client
@@ -379,27 +362,18 @@ namespace Project2ITProcessCommSocket {
 		/* Testing End*/
 
 		/* ======= MODIFIED SECTION: File Transfer Logic ======= */
-		bool success = ReceiveFile(new_socket,
+		bool success = ReceiveFile(
+			new_socket,
 			textboxFilepath->Text,
 			textboxStatus);
 		/* ======= End of File Transfer Logic ======= */
-
+		
+		/*
 		// Send a confirmation response back to the client
 		const char* response = "File received successfully";
 		send(new_socket, response, strlen(response), 0);
 		StatusUpdate("Response sent: File received successfully");
-
-		/*
-
-		// std::cout << "Server received: " << buffer << std::endl;
-
-		// クライアントに応答を送信する
-		const char* response = "Hello from server";
-		send(new_socket, response, strlen(response), 0);
-		std::cout << "Response sent\n";
-		StatusUpdate("Response sent");
 		*/
-
 		// ソケットを閉じる and clean up Winsock
 		closesocket(new_socket);
 		closesocket(server_fd);
