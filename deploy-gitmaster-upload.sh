@@ -7,7 +7,7 @@ git checkout master || exit 1
 git status
 
 # Add changes interactively (optional)
-git add -p
+# git add -p
 
 # Add changes
 git add .
