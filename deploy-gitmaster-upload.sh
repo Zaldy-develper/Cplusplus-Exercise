@@ -6,6 +6,9 @@ git checkout master || exit 1
 # Check for untracked or modified files
 git status
 
+# Add changes interactively (optional)
+git add -p
+
 # Add changes
 git add .
 

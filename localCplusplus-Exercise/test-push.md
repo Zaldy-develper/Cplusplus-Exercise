@@ -1,3 +1,4 @@
+"my test"
 #pragma once
 #include <iostream>
 #include <cstring>
