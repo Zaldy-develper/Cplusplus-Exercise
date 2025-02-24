@@ -1,3 +1,0 @@
-C:\Users\RTE\source\repos\zaldy\Project2IT-ProcessCommSocket\Project2IT-ProcessCommSocket\x64\Debug\Project2IT-ProcessCommSocket.vcxproj.AssemblyReference.cache
-C:\Users\RTE\source\repos\zaldy\Project2IT-ProcessCommSocket\Project2IT-ProcessCommSocket\x64\Debug\Project2ITProcessCommSocket.MyForm.resources
-C:\Users\RTE\source\repos\zaldy\Project2IT-ProcessCommSocket\Project2IT-ProcessCommSocket\x64\Debug\Project2IT-ProcessCommSocket.vcxproj.GenerateResource.cache
