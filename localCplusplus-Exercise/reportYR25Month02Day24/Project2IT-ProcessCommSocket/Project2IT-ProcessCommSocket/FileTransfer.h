@@ -11,5 +11,3 @@ using namespace System::Windows::Forms;
 using namespace System::IO;
 
 bool ReceiveFile(SOCKET clientSocket, String^ savePath, TextBox^ statusTextBox);
-bool ReceiveFile(SOCKET clientSocket, String^ savePath);
-bool sendHello(SOCKET socket, String^ greeting, TextBox^ statusTextBox); 
