@@ -1,0 +1,127 @@
+{
+  "groups": [
+    {
+      "id": "group1",
+      "left": "498px",
+      "top": "45px",
+      "width": "500px",
+      "height": "500px",
+      "locked": "true"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "block1",
+      "type": "Block1",
+      "displayLabel": "Block1, isIPValid",
+      "left": "20px",
+      "top": "20px",
+      "group": null
+    },
+    {
+      "id": "block2",
+      "type": "Block2",
+      "displayLabel": "Block2, PortIsValid",
+      "left": "170px",
+      "top": "120px",
+      "group": null
+    },
+    {
+      "id": "block3",
+      "type": "Block3",
+      "displayLabel": "Block3, PathNotEmptyBlock",
+      "left": "320px",
+      "top": "220px",
+      "group": null
+    },
+    {
+      "id": "block4",
+      "type": "Block4",
+      "displayLabel": "Block4, isNameValid",
+      "left": "81px",
+      "top": "333px",
+      "group": null
+    },
+    {
+      "id": "block5",
+      "type": "Block1",
+      "displayLabel": "Block1, isIPValid",
+      "left": "182px",
+      "top": "32px",
+      "group": "group1"
+    },
+    {
+      "id": "block6",
+      "type": "Block2",
+      "displayLabel": "Block2, PortIsValid",
+      "left": "81px",
+      "top": "167px",
+      "group": "group1"
+    },
+    {
+      "id": "block7",
+      "type": "Block4",
+      "displayLabel": "Block4, isNameValid",
+      "left": "223px",
+      "top": "313px",
+      "group": "group1"
+    },
+    {
+      "id": "block8",
+      "type": "Block2",
+      "displayLabel": "Block2, PortIsValid",
+      "left": "263px",
+      "top": "162px",
+      "group": "group1"
+    }
+  ],
+  "connections": [
+    {
+      "fromBlockId": "block1",
+      "fromPort": "success",
+      "toBlockId": "block2",
+      "nodes": []
+    },
+    {
+      "fromBlockId": "block2",
+      "fromPort": "failure",
+      "toBlockId": "block4",
+      "nodes": []
+    },
+    {
+      "fromBlockId": "block2",
+      "fromPort": "success",
+      "toBlockId": "block3",
+      "nodes": []
+    },
+    {
+      "fromBlockId": "block5",
+      "fromPort": "failure",
+      "toBlockId": "block6",
+      "nodes": []
+    },
+    {
+      "fromBlockId": "block6",
+      "fromPort": "failure",
+      "toBlockId": "block7",
+      "nodes": [
+        {
+          "x": 540,
+          "y": 322
+        }
+      ]
+    },
+    {
+      "fromBlockId": "block5",
+      "fromPort": "success",
+      "toBlockId": "block8",
+      "nodes": []
+    },
+    {
+      "fromBlockId": "block8",
+      "fromPort": "success",
+      "toBlockId": "block7",
+      "nodes": []
+    }
+  ]
+}

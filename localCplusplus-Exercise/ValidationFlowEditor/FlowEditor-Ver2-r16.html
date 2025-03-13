@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Validation Flow Editor</title>
+  <style>
+    /* General reset and typography */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+    }
+    h1 {
+      font-size: 1.5em;
+      margin-bottom: 0.5em;
+    }
+    /* Container layout using flex */
+    #container {
+      display: flex;
+      height: 100vh;
+    }
+    /* Sidebar styles */
+    #sidebar {
+      width: 250px;
+      background: #fff;
+      border-right: 1px solid #ccc;
+      padding: 15px;
+      box-sizing: border-box;
+    }
+    #sidebar h2 {
+      font-size: 1.2em;
+      margin-top: 0;
+    }
+    #sidebar input,
+    #sidebar select,
+    #sidebar button {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+    /* Canvas container: allows scrolling and a large working area */
+    #canvasContainer {
+      position: relative;
+      flex: 1;
+      background: #e9e9e9;
+      overflow: auto;
+    }
+    /* Main canvas for blocks */
+    #canvas {
+      position: relative;
+      z-index: 10;
+      min-width: 2000px;
+      min-height: 2000px;
+    }
+    /* SVG layer for connection paths */
+    #svgCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+      pointer-events: none;
+    }
+    /* New overlay container for interactive connection elements */
+    #connOverlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 20; /* above blocks */
+      pointer-events: none;
+    }
+    /* Interactive elements within overlay will have pointer-events enabled */
+    #connOverlay .interactive {
+      pointer-events: auto;
+      position: absolute;
+    }
+    /* Block styling */
+    .block {
+      width: 120px;
+      height: 70px;
+      background: #fff;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+      position: absolute;
+      cursor: move;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+      padding-top: 20px;
+      box-sizing: border-box;
+    }
+    .block .label {
+      font-weight: bold;
+    }
+    /* Delete button for blocks */
+    .delete-btn {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 16px;
+      height: 16px;
+      background: red;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      z-index: 15;
+    }
+    /* Delete button for path */
+    .connection-delete-btn.interactive {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: red;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      z-index: 20;
+    }
+    /* Port styling */
+    .port {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #666;
+      position: absolute;
+      cursor: pointer;
+      z-index: 12;
+    }
+    /* Input port: top center */
+    .port.input {
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #4caf50;
+    }
+    /* Output port (failure): left center */
+    .port.output.failure {
+      left: -5px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #f44336;
+    }
+    /* Output port (success): right center */
+    .port.output.success {
+      right: -5px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #2196f3;
+    }
+    /* Highlight selected port */
+    .port.selected {
+      box-shadow: 0 0 5px 2px #ff9800;
+    }
+    /* Add-node button styling */
+    .add-node-btn {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #4caf50;
+      color: #fff;
+      font-size: 10px;
+      line-height: 12px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 22;
+    }
+    /* Node circle styling */
+    .node-circle {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ff9800;
+      cursor: move;
+      z-index: 22;
+    }
+    /* Group canvas styling */
+    .group-canvas {
+      position: absolute;
+      border: 2px dashed #888;
+      background: rgba(200,200,200,0.2);
+      min-width: 200px;
+      min-height: 200px;
+    }
+    .group-canvas.active {
+      border-color: #007acc;
+    }
+    /* Resize handle for group canvas */
+    .resize-handle {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 16px;
+      height: 16px;
+      background: gray;
+      cursor: se-resize;
+      z-index: 100;
+    }
+    /* Group lock button styling */
+    .group-lock-btn {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #007acc;
+      color: #fff;
+      padding: 2px 4px;
+      cursor: pointer;
+      z-index: 50;
+      font-size: 12px;
+    }
+    /* Button styling */
+    button {
+      border: none;
+      background: #007acc;
+      color: #fff;
+      font-size: 1em;
+      padding: 8px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <!-- Sidebar with controls -->
+    <div id="sidebar">
+      <h2>Controls</h2>
+      <input type="file" id="csvFileInput" accept=".csv" />
+      <select id="blockTypeSelect">
+        <option value="">-- Load CSV for block types --</option>
+      </select>
+      <button id="addBlockButton" disabled>Add Block</button>
+      <hr>
+      <button id="generateButton">Generate &amp; Download Header</button>
+      <button id="saveLayoutButton">Save Layout</button>
+      <button id="loadLayoutButton">Load Layout</button>
+      <button id="createGroupButton">Create Group Canvas</button>
+      <input type="file" id="loadLayoutInput" accept=".json" style="display:none">
+    </div>
+    <!-- Canvas area -->
+    <div id="canvasContainer">
+      <div id="canvas"></div>
+      <svg id="svgCanvas"></svg>
+      <div id="connOverlay"></div>
+    </div>
+  </div>
+
+  <script>
+    // Global variables
+    let availableBlockTypes = [];
+    let blocks = []; // Each block: { id, type, element, group }
+    let connections = []; // Each connection: { fromBlockId, fromPort, toBlockId, nodes: [ {x, y}, ... ] }
+    let groups = []; // Each group: { id, element }
+    let blockIdCounter = 1;
+    let groupIdCounter = 1;
+    let selectedOutput = null; // Selected output port for connection
+    let activeGroup = null;    // Currently active group canvas
+    let draggingNode = null;   // Holds info when dragging a node
+
+    const csvFileInput = document.getElementById('csvFileInput');
+    const blockTypeSelect = document.getElementById('blockTypeSelect');
+    const addBlockButton = document.getElementById('addBlockButton');
+    const generateButton = document.getElementById('generateButton');
+    const saveLayoutButton = document.getElementById('saveLayoutButton');
+    const loadLayoutButton = document.getElementById('loadLayoutButton');
+    const createGroupButton = document.getElementById('createGroupButton');
+    const loadLayoutInput = document.getElementById('loadLayoutInput');
+    const canvas = document.getElementById('canvas');
+    const svgCanvas = document.getElementById('svgCanvas');
+    const connOverlay = document.getElementById('connOverlay');
+
+    // CSV upload: load block types
+    csvFileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const content = e.target.result;
+        const lines = content.split(/\r?\n/);
+        availableBlockTypes = [];
+        const labelMapping = {
+          "isValid": "IpNotEmptyBlock",
+          "isPortValid": "PortIsValid",
+          "isPathValid": "PathNotEmptyBlock"
+        };
+        lines.forEach(line => {
+          if (!line.trim()) return;
+          const parts = line.split(',');
+          if (parts.length >= 2) {
+            const blockType = parts[0].trim();
+            const funcName = parts[1].trim();
+            const mappedFunc = labelMapping[funcName] || funcName;
+            const displayLabel = blockType + ", " + mappedFunc;
+            if (!availableBlockTypes.some(item => item.type === blockType)) {
+              availableBlockTypes.push({ type: blockType, displayLabel: displayLabel });
+            }
+          } else {
+            const blockType = parts[0].trim();
+            if (blockType && !availableBlockTypes.some(item => item.type === blockType)) {
+              availableBlockTypes.push({ type: blockType, displayLabel: blockType });
+            }
+          }
+        });
+        updateBlockTypeSelect();
+        addBlockButton.disabled = false;
+      };
+      reader.readAsText(file);
+    });
+
+    function updateBlockTypeSelect() {
+      blockTypeSelect.innerHTML = "";
+      availableBlockTypes.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.type;
+        option.textContent = item.displayLabel;
+        option.dataset.label = item.displayLabel;
+        blockTypeSelect.appendChild(option);
+      });
+    }
+
+    // Add block (if in an active group, add inside; otherwise, to main canvas)
+    addBlockButton.addEventListener('click', function() {
+      const type = blockTypeSelect.value;
+      if (!type) return alert("Please select a block type.");
+      const selectedOption = blockTypeSelect.options[blockTypeSelect.selectedIndex];
+      const displayLabel = selectedOption.dataset.label;
+      const id = "block" + blockIdCounter++;
+      const blockEl = document.createElement('div');
+      blockEl.className = "block";
+      blockEl.dataset.id = id;
+      let posX, posY;
+      if (activeGroup) {
+        const groupBlocks = activeGroup.querySelectorAll('.block');
+        if (groupBlocks.length === 0) {
+          posX = 20;
+          posY = 20;
+        } else {
+          const lastBlock = groupBlocks[groupBlocks.length - 1];
+          posX = parseInt(lastBlock.style.left) + 150;
+          posY = parseInt(lastBlock.style.top) + 100;
+        }
+        blockEl.style.left = posX + "px";
+        blockEl.style.top = posY + "px";
+        activeGroup.appendChild(blockEl);
+      } else {
+        if (blocks.length === 0) {
+          posX = 20;
+          posY = 20;
+        } else {
+          const lastBlock = blocks[blocks.length - 1].element;
+          posX = parseInt(lastBlock.style.left) + 150;
+          posY = parseInt(lastBlock.style.top) + 100;
+        }
+        blockEl.style.left = posX + "px";
+        blockEl.style.top = posY + "px";
+        canvas.appendChild(blockEl);
+      }
+      const label = document.createElement('div');
+      label.className = "label";
+      label.textContent = displayLabel;
+      blockEl.appendChild(label);
+      const deleteBtn = document.createElement('div');
+      deleteBtn.className = "delete-btn";
+      deleteBtn.textContent = "X";
+      deleteBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (confirm("Delete this block?")) {
+          deleteBlock(id);
+        }
+      });
+      blockEl.appendChild(deleteBtn);
+      const inputPort = document.createElement('div');
+      inputPort.className = "port input";
+      inputPort.dataset.port = "input";
+      blockEl.appendChild(inputPort);
+      const failurePort = document.createElement('div');
+      failurePort.className = "port output failure";
+      failurePort.dataset.port = "failure";
+      blockEl.appendChild(failurePort);
+      const successPort = document.createElement('div');
+      successPort.className = "port output success";
+      successPort.dataset.port = "success";
+      blockEl.appendChild(successPort);
+      blocks.push({ id, type, element: blockEl, group: activeGroup ? activeGroup.dataset.id : null });
+      makeDraggable(blockEl);
+      blockEl.addEventListener('mousedown', function(e) { e.stopPropagation(); });
+      failurePort.addEventListener('click', function(e) {
+        e.stopPropagation();
+        selectOutputPort(blockEl, "failure", failurePort);
+      });
+      successPort.addEventListener('click', function(e) {
+        e.stopPropagation();
+        selectOutputPort(blockEl, "success", successPort);
+      });
+      inputPort.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (selectedOutput) {
+          if (selectedOutput.blockEl === blockEl) {
+            alert("Cannot connect a block to itself.");
+            clearSelectedPort();
+            return;
+          }
+          addConnection(selectedOutput.blockEl, selectedOutput.portType, blockEl);
+          clearSelectedPort();
+          updateConnections();
+        }
+      });
+      updateConnections();
+    });
+
+    function deleteBlock(blockId) {
+      const blockIndex = blocks.findIndex(b => b.id === blockId);
+      if (blockIndex === -1) return;
+      const block = blocks[blockIndex];
+      if (block.group) {
+        const parentGroup = canvas.querySelector(`[data-id="${block.group}"]`);
+        if (parentGroup) { parentGroup.removeChild(block.element); }
+      } else { canvas.removeChild(block.element); }
+      blocks.splice(blockIndex, 1);
+      connections = connections.filter(conn => conn.fromBlockId !== blockId && conn.toBlockId !== blockId);
+      updateConnections();
+    }
+
+    function selectOutputPort(blockEl, portType, portEl) {
+      clearSelectedPort();
+      selectedOutput = { blockEl, portType, portEl };
+      portEl.classList.add("selected");
+    }
+
+    function clearSelectedPort() {
+      if (selectedOutput) {
+        selectedOutput.portEl.classList.remove("selected");
+        selectedOutput = null;
+      }
+    }
+
+    function addConnection(fromBlockEl, portType, toBlockEl) {
+      const fromId = fromBlockEl.dataset.id;
+      const toId = toBlockEl.dataset.id;
+      const existing = connections.find(conn => conn.fromBlockId === fromId && conn.fromPort === portType);
+      if (existing) { existing.toBlockId = toId; }
+      else { connections.push({ fromBlockId: fromId, fromPort: portType, toBlockId: toBlockEl.dataset.id, nodes: [] }); }
+    }
+
+    function makeDraggable(el) {
+      let offsetX, offsetY;
+      el.addEventListener('mousedown', onMouseDown);
+      function onMouseDown(e) {
+        if (el.classList.contains("block")) { e.stopPropagation(); }
+        if (el.classList.contains("group-canvas") && el.dataset.locked === "true") { return; }
+        el.style.zIndex = 1000;
+        const rect = el.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+      }
+      function onMouseMove(e) {
+        const canvasRect = canvas.getBoundingClientRect();
+        let x = e.clientX - canvasRect.left - offsetX;
+        let y = e.clientY - canvasRect.top - offsetY;
+        x = Math.max(0, Math.min(x, canvas.clientWidth - el.clientWidth));
+        y = Math.max(0, Math.min(y, canvas.clientHeight - el.clientHeight));
+        el.style.left = x + "px";
+        el.style.top = y + "px";
+        updateConnections();
+      }
+      function onMouseUp(e) {
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+        el.style.zIndex = "";
+        if (el.classList.contains("block")) { checkAndReparentBlock(el); }
+      }
+    }
+
+    function checkAndReparentBlock(el) {
+      const blockRect = el.getBoundingClientRect();
+      const canvasRect = canvas.getBoundingClientRect();
+      const centerX = blockRect.left - canvasRect.left + blockRect.width / 2;
+      const centerY = blockRect.top - canvasRect.top + blockRect.height / 2;
+      let foundGroup = null;
+      groups.forEach(g => {
+        const groupRect = g.element.getBoundingClientRect();
+        const groupLeft = groupRect.left - canvasRect.left;
+        const groupTop = groupRect.top - canvasRect.top;
+        const groupRight = groupLeft + groupRect.width;
+        const groupBottom = groupTop + groupRect.height;
+        if (centerX >= groupLeft && centerX <= groupRight && centerY >= groupTop && centerY <= groupBottom) {
+          foundGroup = g;
+        }
+      });
+      if (foundGroup) {
+        if (el.parentElement !== foundGroup.element) {
+          const groupRect = foundGroup.element.getBoundingClientRect();
+          const newLeft = blockRect.left - groupRect.left;
+          const newTop = blockRect.top - groupRect.top;
+          el.style.left = newLeft + "px";
+          el.style.top = newTop + "px";
+          foundGroup.element.appendChild(el);
+          const block = blocks.find(b => b.id === el.dataset.id);
+          if (block) { block.group = foundGroup.id; }
+        }
+      } else {
+        if (el.parentElement.classList.contains("group-canvas")) {
+          const absRect = el.getBoundingClientRect();
+          const newLeft = absRect.left - canvasRect.left;
+          const newTop = absRect.top - canvasRect.top;
+          el.style.left = newLeft + "px";
+          el.style.top = newTop + "px";
+          canvas.appendChild(el);
+          const block = blocks.find(b => b.id === el.dataset.id);
+          if (block) { block.group = null; }
+        }
+      }
+    }
+
+    // Returns center coordinates of an element relative to the canvas
+    function getCenterCoordinates(el) {
+      const canvasRect = canvas.getBoundingClientRect();
+      const rect = el.getBoundingClientRect();
+      return {
+        x: rect.left - canvasRect.left + rect.width / 2,
+        y: rect.top - canvasRect.top + rect.height / 2
+      };
+    }
+
+    // --- Functions for node dragging on connections (using the overlay) ---
+    function getOverlayCoordinates(e) {
+      const overlayRect = connOverlay.getBoundingClientRect();
+      return {
+        x: e.clientX - overlayRect.left,
+        y: e.clientY - overlayRect.top
+      };
+    }
+    function startDragNode(e, connection, nodeIndex) {
+      draggingNode = { connection, nodeIndex };
+      document.addEventListener("mousemove", onDragNode);
+      document.addEventListener("mouseup", stopDragNode);
+    }
+    function onDragNode(e) {
+      if (!draggingNode) return;
+      const pos = getOverlayCoordinates(e);
+      draggingNode.connection.nodes[draggingNode.nodeIndex] = { x: pos.x, y: pos.y };
+      updateConnections();
+    }
+    function stopDragNode(e) {
+      draggingNode = null;
+      document.removeEventListener("mousemove", onDragNode);
+      document.removeEventListener("mouseup", stopDragNode);
+    }
+    // --- End node dragging functions ---
+
+    // Revised updateConnections() to draw paths on the SVG layer and interactive elements on the overlay.
+    function updateConnections() {
+      svgCanvas.innerHTML = "";
+      connOverlay.innerHTML = "";
+      const canvasRect = canvas.getBoundingClientRect();
+      connections.forEach(conn => {
+        const fromBlock = blocks.find(b => b.id === conn.fromBlockId);
+        const toBlock = blocks.find(b => b.id === conn.toBlockId);
+        if (!fromBlock || !toBlock) return;
+        const fromPort = fromBlock.element.querySelector(`.port.output.${conn.fromPort}`);
+        const toPort = toBlock.element.querySelector('.port.input');
+        if (!fromPort || !toPort) return;
+        const start = getCenterCoordinates(fromPort);
+        const end = getCenterCoordinates(toPort);
+        if (!conn.nodes) { conn.nodes = []; }
+        let pathD = "";
+        if (conn.nodes.length === 0) {
+          const offset = 50;
+          pathD = `M ${start.x} ${start.y} C ${start.x + offset} ${start.y}, ${end.x - offset} ${end.y}, ${end.x} ${end.y}`;
+        } else {
+          pathD = `M ${start.x} ${start.y} `;
+          conn.nodes.forEach(node => { pathD += `L ${node.x} ${node.y} `; });
+          pathD += `L ${end.x} ${end.y}`;
+        }
+        const visiblePath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        visiblePath.setAttribute("d", pathD);
+        visiblePath.setAttribute("stroke", "#555");
+        visiblePath.setAttribute("fill", "none");
+        visiblePath.setAttribute("stroke-width", "2");
+        visiblePath.classList.add("connection-path");
+        svgCanvas.appendChild(visiblePath);
+
+        const portRect = fromPort.getBoundingClientRect();
+        const addBtnX = (portRect.left + portRect.width/2) - canvasRect.left - 6;
+        const addBtnY = portRect.bottom - canvasRect.top + 2;
+        const addBtn = document.createElement("div");
+        addBtn.className = "add-node-btn interactive";
+        addBtn.style.left = addBtnX + "px";
+        addBtn.style.top = addBtnY + "px";
+        addBtn.textContent = "+";
+        addBtn.addEventListener("click", function(e) {
+          e.stopPropagation();
+          let newNode = {};
+          if (conn.nodes.length === 0) { newNode = { x: start.x, y: start.y + 30 }; }
+          else { 
+            const lastNode = conn.nodes[conn.nodes.length - 1];
+            newNode = { x: lastNode.x, y: lastNode.y + 30 }; 
+          }
+          conn.nodes.push(newNode);
+          updateConnections();
+        });
+        connOverlay.appendChild(addBtn);
+
+        conn.nodes.forEach((node, index) => {
+          const circle = document.createElement("div");
+          circle.className = "node-circle interactive";
+          circle.style.left = (node.x - 5) + "px";
+          circle.style.top = (node.y - 5) + "px";
+          circle.addEventListener("mousedown", function(e) {
+            e.stopPropagation();
+            startDragNode(e, conn, index);
+          });
+          connOverlay.appendChild(circle);
+        });
+
+        const delBtnX = (portRect.left + portRect.width/2) - canvasRect.left - 8;
+        const delBtnY = (portRect.top) - canvasRect.top - 20;
+        const delBtn = document.createElement("div");
+        delBtn.className = "connection-delete-btn interactive";
+        delBtn.style.left = delBtnX + "px";
+        delBtn.style.top = delBtnY + "px";
+        delBtn.textContent = "x";
+        delBtn.addEventListener("click", function(e) {
+          e.stopPropagation();
+          if (confirm("Delete this connection?")) {
+            deleteConnection(conn.fromBlockId, conn.fromPort, conn.toBlockId);
+          }
+        });
+        connOverlay.appendChild(delBtn);
+      });
+    }
+
+    function deleteConnection(fromBlockId, fromPort, toBlockId) {
+      connections = connections.filter(conn => {
+        return !(conn.fromBlockId === fromBlockId && conn.fromPort === fromPort && conn.toBlockId === toBlockId);
+      });
+      updateConnections();
+    }
+
+    // Save layout (groups, blocks, connections) as JSON
+    saveLayoutButton.addEventListener('click', function() {
+      const layout = {
+        groups: groups.map(g => ({
+          id: g.id,
+          left: g.element.style.left,
+          top: g.element.style.top,
+          width: g.element.style.width,
+          height: g.element.style.height,
+          locked: g.element.dataset.locked || "false"
+        })),
+        blocks: blocks.map(b => ({
+          id: b.id,
+          type: b.type,
+          displayLabel: b.element.querySelector('.label').textContent,
+          left: b.element.style.left,
+          top: b.element.style.top,
+          group: b.group
+        })),
+        connections: connections
+      };
+      const json = JSON.stringify(layout, null, 2);
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "layout.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+
+    // Load layout from JSON
+    loadLayoutButton.addEventListener('click', function() {
+      loadLayoutInput.click();
+    });
+    loadLayoutInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const layout = JSON.parse(e.target.result);
+        groups.forEach(g => canvas.removeChild(g.element));
+        groups = [];
+        blocks.forEach(b => {
+          if (b.group) {
+            const parentGroup = canvas.querySelector(`[data-id="${b.group}"]`);
+            if (parentGroup) { parentGroup.removeChild(b.element); }
+          } else { canvas.removeChild(b.element); }
+        });
+        blocks = [];
+        connections = [];
+        connOverlay.innerHTML = "";
+        svgCanvas.innerHTML = "";
+        if (layout.groups) {
+          layout.groups.forEach(gData => {
+            const groupEl = document.createElement('div');
+            groupEl.className = "group-canvas";
+            groupEl.dataset.id = gData.id;
+            groupEl.style.left = gData.left;
+            groupEl.style.top = gData.top;
+            groupEl.style.width = gData.width;
+            groupEl.style.height = gData.height;
+            groupEl.dataset.locked = gData.locked || "false";
+            canvas.appendChild(groupEl);
+            groups.push({ id: gData.id, element: groupEl });
+            makeDraggable(groupEl);
+            makeResizable(groupEl);
+            const lockBtn = document.createElement('div');
+            lockBtn.className = "group-lock-btn";
+            lockBtn.textContent = (groupEl.dataset.locked === "true") ? "Unlock" : "Lock";
+            groupEl.appendChild(lockBtn);
+            lockBtn.addEventListener('click', function(e) {
+              e.stopPropagation();
+              if (groupEl.dataset.locked === "true") {
+                groupEl.dataset.locked = "false";
+                lockBtn.textContent = "Lock";
+              } else {
+                groupEl.dataset.locked = "true";
+                lockBtn.textContent = "Unlock";
+              }
+            });
+            groupEl.addEventListener('click', function(e) {
+              e.stopPropagation();
+              if (activeGroup && activeGroup !== groupEl) { activeGroup.classList.remove("active"); }
+              activeGroup = groupEl;
+              groupEl.classList.add("active");
+            });
+          });
+        }
+        if (layout.blocks) {
+          layout.blocks.forEach(bData => {
+            const blockEl = document.createElement('div');
+            blockEl.className = "block";
+            blockEl.dataset.id = bData.id;
+            blockEl.style.left = bData.left;
+            blockEl.style.top = bData.top;
+            const label = document.createElement('div');
+            label.className = "label";
+            label.textContent = bData.displayLabel;
+            blockEl.appendChild(label);
+            const deleteBtn = document.createElement('div');
+            deleteBtn.className = "delete-btn";
+            deleteBtn.textContent = "X";
+            deleteBtn.addEventListener('click', function(e) {
+              e.stopPropagation();
+              if (confirm("Delete this block?")) { deleteBlock(bData.id); }
+            });
+            blockEl.appendChild(deleteBtn);
+            const inputPort = document.createElement('div');
+            inputPort.className = "port input";
+            inputPort.dataset.port = "input";
+            blockEl.appendChild(inputPort);
+            const failurePort = document.createElement('div');
+            failurePort.className = "port output failure";
+            failurePort.dataset.port = "failure";
+            blockEl.appendChild(failurePort);
+            const successPort = document.createElement('div');
+            successPort.className = "port output success";
+            successPort.dataset.port = "success";
+            blockEl.appendChild(successPort);
+            if (bData.group) {
+              const parentGroup = canvas.querySelector(`[data-id="${bData.group}"]`);
+              if (parentGroup) { parentGroup.appendChild(blockEl); }
+            } else { canvas.appendChild(blockEl); }
+            blocks.push({ id: bData.id, type: bData.type, element: blockEl, group: bData.group || null });
+            makeDraggable(blockEl);
+            failurePort.addEventListener('click', function(e) {
+              e.stopPropagation();
+              selectOutputPort(blockEl, "failure", failurePort);
+            });
+            successPort.addEventListener('click', function(e) {
+              e.stopPropagation();
+              selectOutputPort(blockEl, "success", successPort);
+            });
+            inputPort.addEventListener('click', function(e) {
+              e.stopPropagation();
+              if (selectedOutput) {
+                if (selectedOutput.blockEl === blockEl) {
+                  alert("Cannot connect a block to itself.");
+                  clearSelectedPort();
+                  return;
+                }
+                addConnection(selectedOutput.blockEl, selectedOutput.portType, blockEl);
+                clearSelectedPort();
+                updateConnections();
+              }
+            });
+          });
+        }
+        connections = layout.connections || [];
+        updateConnections();
+        const maxBlockId = blocks.reduce((max, b) => {
+          const num = parseInt(b.id.replace("block", ""));
+          return num > max ? num : max;
+        }, 0);
+        blockIdCounter = maxBlockId + 1;
+        const maxGroupId = groups.reduce((max, g) => {
+          const num = parseInt(g.id.replace("group", ""));
+          return num > max ? num : max;
+        }, 0);
+        groupIdCounter = maxGroupId + 1;
+      };
+      reader.readAsText(file);
+    });
+
+    createGroupButton.addEventListener('click', function() {
+      const groupId = "group" + groupIdCounter++;
+      const groupEl = document.createElement('div');
+      groupEl.className = "group-canvas";
+      groupEl.dataset.id = groupId;
+      groupEl.style.left = "50px";
+      groupEl.style.top = "50px";
+      groupEl.style.width = "500px";
+      groupEl.style.height = "500px";
+      groupEl.dataset.locked = "false";
+      canvas.appendChild(groupEl);
+      groups.push({ id: groupId, element: groupEl });
+      makeDraggable(groupEl);
+      makeResizable(groupEl);
+      const lockBtn = document.createElement('div');
+      lockBtn.className = "group-lock-btn";
+      lockBtn.textContent = "Lock";
+      groupEl.appendChild(lockBtn);
+      lockBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (groupEl.dataset.locked === "true") {
+          groupEl.dataset.locked = "false";
+          lockBtn.textContent = "Lock";
+        } else {
+          groupEl.dataset.locked = "true";
+          lockBtn.textContent = "Unlock";
+        }
+      });
+      groupEl.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (activeGroup && activeGroup !== groupEl) { activeGroup.classList.remove("active"); }
+        activeGroup = groupEl;
+        groupEl.classList.add("active");
+      });
+    });
+
+    function makeResizable(el) {
+      const resizer = document.createElement('div');
+      resizer.className = "resize-handle";
+      el.appendChild(resizer);
+      resizer.addEventListener('mousedown', initResize);
+      function initResize(e) {
+        e.stopPropagation();
+        window.addEventListener('mousemove', resize);
+        window.addEventListener('mouseup', stopResize);
+      }
+      function resize(e) {
+        const rect = el.getBoundingClientRect();
+        let newWidth = e.clientX - rect.left;
+        let newHeight = e.clientY - rect.top;
+        newWidth = Math.max(newWidth, 100);
+        newHeight = Math.max(newHeight, 100);
+        el.style.width = newWidth + "px";
+        el.style.height = newHeight + "px";
+        updateConnections();
+      }
+      function stopResize(e) {
+        window.removeEventListener('mousemove', resize);
+        window.removeEventListener('mouseup', stopResize);
+      }
+    }
+
+    // Clear selected output port and active group if clicking on main canvas.
+    canvas.addEventListener('click', function(e) {
+      clearSelectedPort();
+      if (e.target === canvas) {
+        if (activeGroup) { activeGroup.classList.remove("active"); activeGroup = null; }
+      }
+    });
+
+    // Revised Generate & Download Header logic using the builder API.
+    generateButton.addEventListener('click', function() {
+      let output = "";
+      output += "#pragma once\n";
+      output += "#ifndef VALIDATIONFLOWCONFIG_H\n";
+      output += "#define VALIDATIONFLOWCONFIG_H\n\n";
+      output += "#include <memory>\n";
+      output += "#include <vector>\n";
+      output += "#include \"ValidationFlow.h\"        // Contains definitions for InputHandler, ValidationBlock, etc.\n";
+      output += "#include \"ValidationFlowBuilder.h\" // Contains the builder class to configure the flow\n\n";
+      output += "// -----------------------------------------------------------------------------\n";
+      output += "// Function: setupValidationBlocks()\n";
+      output += "// Purpose: Uses the ValidationFlowBuilder to create and configure the validation blocks\n";
+      output += "//          with proper branching.\n";
+      output += "//          The configuration in this example creates the following chain:\n";
+      output += "//            - Block1 (IpNotEmptyBlock): Checks that the IP address is not empty.\n";
+      output += "//                On success, it proceeds to Block2.\n";
+      output += "//            - Block2 (ValidIpFormatBlock): Validates the IP address format.\n";
+      output += "//                On success, it goes to Block3.\n";
+      output += "//                On failure, it goes to Block7 (TestingOfMyBranch).\n";
+      output += "//            - Block3 (PortNotEmptyBlock): Checks that the Port field is not empty.\n";
+      output += "// Returns: A vector containing the starting block of the validation flow.\n";
+      output += "inline std::vector<std::shared_ptr<ValidationBlock>> setupValidationBlocks() {\n";
+      output += "    // Create an instance of the builder.\n";
+      output += "    ValidationFlowBuilder builder;\n\n";
+
+      // Generate block registration calls.
+      let blockMap = {};
+      blocks.forEach(b => {
+        let labelText = b.element.querySelector('.label').textContent;
+        let parts = labelText.split(',');
+        if (parts.length >= 2) {
+          let identifier = parts[0].trim();
+          let className = parts[1].trim();
+          if (!blockMap[identifier]) { blockMap[identifier] = className; }
+        }
+      });
+      for (let identifier in blockMap) {
+        output += `    builder.addBlock("${identifier}", std::make_shared<${blockMap[identifier]}>());\n`;
+      }
+      output += "\n";
+
+      // Generate transitions based on connections.
+      let transitionMap = {};
+      connections.forEach(conn => {
+        if (!transitionMap[conn.fromBlockId]) {
+          transitionMap[conn.fromBlockId] = { success: "", failure: "" };
+        }
+        if (conn.fromPort === "success") {
+          transitionMap[conn.fromBlockId].success = conn.toBlockId;
+        } else if (conn.fromPort === "failure") {
+          transitionMap[conn.fromBlockId].failure = conn.toBlockId;
+        }
+      });
+      let idMapping = {};
+      blocks.forEach(b => {
+        let labelText = b.element.querySelector('.label').textContent;
+        let parts = labelText.split(',');
+        if (parts.length >= 1) {
+          idMapping[b.id] = parts[0].trim();
+        }
+      });
+      for (let fromId in transitionMap) {
+        let fromIdentifier = idMapping[fromId] || fromId;
+        let trans = transitionMap[fromId];
+        if (trans.success && trans.failure) {
+          let toSuccess = idMapping[trans.success] || trans.success;
+          let toFailure = idMapping[trans.failure] || trans.failure;
+          output += `    builder.setTransition("${fromIdentifier}", "${toSuccess}", "${toFailure}");\n`;
+        } else if (trans.success && !trans.failure) {
+          let toSuccess = idMapping[trans.success] || trans.success;
+          output += `    builder.setTransition("${fromIdentifier}", "${toSuccess}");\n`;
+        } else if (!trans.success && trans.failure) {
+          let toFailure = idMapping[trans.failure] || trans.failure;
+          output += `    builder.setTransition("${fromIdentifier}", "", "${toFailure}");\n`;
+        }
+      }
+      output += "\n    // Return the starting block in a vector (runFlow() expects a vector).\n";
+      output += "    return { builder.build() };\n";
+      output += "}\n\n";
+      output += "#endif // VALIDATIONFLOWCONFIG_H\n";
+
+      const blob = new Blob([output], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "ValidationFlowConfig.h";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  </script>
+</body>
+</html>
