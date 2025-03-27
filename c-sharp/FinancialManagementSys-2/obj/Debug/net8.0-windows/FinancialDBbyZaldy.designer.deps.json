@@ -1,0 +1,28 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "FirebirdSql.Data.FirebirdClient/10.3.2": {
+        "runtime": {
+          "lib/net8.0/FirebirdSql.Data.FirebirdClient.dll": {
+            "assemblyVersion": "10.3.2.0",
+            "fileVersion": "10.3.2.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "FirebirdSql.Data.FirebirdClient/10.3.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mo74lexrjTPAQ4XGrVWTdXy1wEnLKl/KcUeHO8HqEcULrqo5HfZmhgbClqIPogeQ6TY6Jh1EClfHa9ALn5IxfQ==",
+      "path": "firebirdsql.data.firebirdclient/10.3.2",
+      "hashPath": "firebirdsql.data.firebirdclient.10.3.2.nupkg.sha512"
+    }
+  }
+}
