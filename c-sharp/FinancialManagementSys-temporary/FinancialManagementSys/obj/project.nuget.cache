@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "l3QeUcmLXwI=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\RTE\\source\\repos\\zaldy\\sql\\FinancialManagementSys\\WinFormsApp1SQL.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\RTE\\.nuget\\packages\\firebirdsql.data.firebirdclient\\10.3.2\\firebirdsql.data.firebirdclient.10.3.2.nupkg.sha512"
+  ],
+  "logs": []
+}

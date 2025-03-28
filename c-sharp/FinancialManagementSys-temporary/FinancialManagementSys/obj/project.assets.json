@@ -1,0 +1,122 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0-windows7.0": {
+      "FirebirdSql.Data.FirebirdClient/10.3.2": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/FirebirdSql.Data.FirebirdClient.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/FirebirdSql.Data.FirebirdClient.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "FirebirdSql.Data.FirebirdClient/10.3.2": {
+      "sha512": "mo74lexrjTPAQ4XGrVWTdXy1wEnLKl/KcUeHO8HqEcULrqo5HfZmhgbClqIPogeQ6TY6Jh1EClfHa9ALn5IxfQ==",
+      "type": "package",
+      "path": "firebirdsql.data.firebirdclient/10.3.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "firebird-logo.png",
+        "firebirdsql.data.firebirdclient.10.3.2.nupkg.sha512",
+        "firebirdsql.data.firebirdclient.nuspec",
+        "lib/net48/FirebirdSql.Data.FirebirdClient.dll",
+        "lib/net5.0/FirebirdSql.Data.FirebirdClient.dll",
+        "lib/net6.0/FirebirdSql.Data.FirebirdClient.dll",
+        "lib/net7.0/FirebirdSql.Data.FirebirdClient.dll",
+        "lib/net8.0/FirebirdSql.Data.FirebirdClient.dll",
+        "lib/netstandard2.0/FirebirdSql.Data.FirebirdClient.dll",
+        "lib/netstandard2.1/FirebirdSql.Data.FirebirdClient.dll",
+        "license.txt"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0-windows7.0": [
+      "FirebirdSql.Data.FirebirdClient >= 10.3.2"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\RTE\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\RTE\\source\\repos\\zaldy\\sql\\FinancialManagementSys\\WinFormsApp1SQL.csproj",
+      "projectName": "FinancialDBbyZaldy",
+      "projectPath": "C:\\Users\\RTE\\source\\repos\\zaldy\\sql\\FinancialManagementSys\\WinFormsApp1SQL.csproj",
+      "packagesPath": "C:\\Users\\RTE\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\RTE\\source\\repos\\zaldy\\sql\\FinancialManagementSys\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\RTE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0-windows"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
+    },
+    "frameworks": {
+      "net8.0-windows7.0": {
+        "targetAlias": "net8.0-windows",
+        "dependencies": {
+          "FirebirdSql.Data.FirebirdClient": {
+            "target": "Package",
+            "version": "[10.3.2, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WindowsForms": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
