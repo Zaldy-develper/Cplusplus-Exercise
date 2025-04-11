@@ -1,0 +1,240 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|c:\\users\\rte\\source\\repos\\zaldy\\csharp\\ipv4socketcommunication-ver1\\sockethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|solutionrelative:sockethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|c:\\users\\rte\\source\\repos\\zaldy\\csharp\\ipv4socketcommunication-ver1\\ipv4socketcommunication_uml.mdpuml||{24510B54-A648-4D69-A6C5-F68CBDF07546}",
+      "RelativeMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|solutionrelative:ipv4socketcommunication_uml.mdpuml||{24510B54-A648-4D69-A6C5-F68CBDF07546}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|c:\\users\\rte\\source\\repos\\zaldy\\csharp\\ipv4socketcommunication-ver1\\clientselectionform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|solutionrelative:clientselectionform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\clientselectionform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|solutionrelative:clientselectionform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|c:\\users\\rte\\source\\repos\\zaldy\\csharp\\ipv4socketcommunication-ver1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|c:\\users\\rte\\source\\repos\\zaldy\\csharp\\ipv4socketcommunication-ver1\\form1.customfunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|solutionrelative:form1.customfunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|c:\\users\\rte\\source\\repos\\zaldy\\csharp\\ipv4socketcommunication-ver1\\validationflow.builder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|solutionrelative:validationflow.builder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|c:\\users\\rte\\source\\repos\\zaldy\\csharp\\ipv4socketcommunication-ver1\\validationflow.config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|solutionrelative:validationflow.config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|c:\\users\\rte\\source\\repos\\zaldy\\csharp\\ipv4socketcommunication-ver1\\validationflow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|solutionrelative:validationflow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|c:\\users\\rte\\source\\repos\\zaldy\\csharp\\ipv4socketcommunication-ver1\\validationflow.properties.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|solutionrelative:validationflow.properties.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|c:\\users\\rte\\source\\repos\\zaldy\\csharp\\ipv4socketcommunication-ver1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|c:\\users\\rte\\source\\repos\\zaldy\\csharp\\ipv4socketcommunication-ver1\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D13853E8-519A-4011-8307-91FF7E776D60}|Ipv4SocketCommunication.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Ipv4SocketCommunication_UML.mdpuml",
+              "DocumentMoniker": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\Ipv4SocketCommunication_UML.mdpuml",
+              "RelativeDocumentMoniker": "Ipv4SocketCommunication_UML.mdpuml",
+              "ToolTip": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\Ipv4SocketCommunication_UML.mdpuml",
+              "RelativeToolTip": "Ipv4SocketCommunication_UML.mdpuml",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAvwEsAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-11T00:58:52.053Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Form1.CustomFunctions.cs",
+              "DocumentMoniker": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\Form1.CustomFunctions.cs",
+              "RelativeDocumentMoniker": "Form1.CustomFunctions.cs",
+              "ToolTip": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\Form1.CustomFunctions.cs",
+              "RelativeToolTip": "Form1.CustomFunctions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T02:10:15.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ClientSelectionForm.cs",
+              "DocumentMoniker": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\ClientSelectionForm.cs",
+              "RelativeDocumentMoniker": "ClientSelectionForm.cs",
+              "ToolTip": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\ClientSelectionForm.cs",
+              "RelativeToolTip": "ClientSelectionForm.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB0AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T01:09:14.381Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwAkAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T07:21:04.286Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SocketHandler.cs",
+              "DocumentMoniker": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\SocketHandler.cs",
+              "RelativeDocumentMoniker": "SocketHandler.cs",
+              "ToolTip": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\SocketHandler.cs",
+              "RelativeToolTip": "SocketHandler.cs",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAawLcBAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T04:08:17.383Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ValidationFlow.Builder.cs",
+              "DocumentMoniker": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\ValidationFlow.Builder.cs",
+              "RelativeDocumentMoniker": "ValidationFlow.Builder.cs",
+              "ToolTip": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\ValidationFlow.Builder.cs",
+              "RelativeToolTip": "ValidationFlow.Builder.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAowD4AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T05:53:14.847Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ValidationFlow.cs",
+              "DocumentMoniker": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\ValidationFlow.cs",
+              "RelativeDocumentMoniker": "ValidationFlow.cs",
+              "ToolTip": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\ValidationFlow.cs",
+              "RelativeToolTip": "ValidationFlow.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAowFAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T07:55:28.516Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ValidationFlow.Properties.cs",
+              "DocumentMoniker": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\ValidationFlow.Properties.cs",
+              "RelativeDocumentMoniker": "ValidationFlow.Properties.cs",
+              "ToolTip": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\ValidationFlow.Properties.cs",
+              "RelativeToolTip": "ValidationFlow.Properties.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAwFMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T00:29:41.879Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T05:18:34.906Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ValidationFlow.Config.cs",
+              "DocumentMoniker": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\ValidationFlow.Config.cs",
+              "RelativeDocumentMoniker": "ValidationFlow.Config.cs",
+              "ToolTip": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\ValidationFlow.Config.cs",
+              "RelativeToolTip": "ValidationFlow.Config.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAqwCgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T06:06:50.328Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\Form1.Designer.cs",
+              "RelativeToolTip": "Form1.Designer.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAowBYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T07:41:29.689Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T07:02:17.52Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ClientSelectionForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\ClientSelectionForm.cs",
+              "RelativeDocumentMoniker": "ClientSelectionForm.cs",
+              "ToolTip": "C:\\Users\\RTE\\source\\repos\\zaldy\\csharp\\Ipv4SocketCommunication-ver1\\ClientSelectionForm.cs [Design]",
+              "RelativeToolTip": "ClientSelectionForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T08:42:30.131Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

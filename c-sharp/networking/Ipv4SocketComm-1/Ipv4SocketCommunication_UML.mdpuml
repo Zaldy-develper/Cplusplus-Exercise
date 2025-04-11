@@ -1,0 +1,300 @@
+﻿@startuml
+'===========================================================================
+' Professional UML Diagram for Ipv4SocketCommunication Project
+' This diagram provides a high-level overview of the system's components,
+' including the UI, networking, and input validation subsystems.
+'===========================================================================
+
+'-------------------------#
+' Set Visual Style Options
+'-------------------------#
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam handwritten false
+skinparam roundcorner 10
+skinparam maxMessageSize 200
+skinparam SequenceMessageAlignment center
+skinparam pageSize A0
+skinparam pageMargin 2
+skinparam scale 70%
+
+title "UML Diagram for Ipv4SocketCommunication Project"
+
+'====================================================================
+' Main Package: Ipv4SocketCommunication
+'====================================================================
+package "Ipv4SocketCommunication" {
+
+    '--------------------------------------------
+    ' UI Components and Main Entry Point Classes
+    '--------------------------------------------
+    class ClientSelectionForm {
+      + ClientSelectionForm()
+      + btnOK_Click(sender: object, e: EventArgs)
+      + btnCancel_Click(sender: object, e: EventArgs)
+    }
+    
+    class Form1 {
+      - statusText: TextBox
+      - ipAddMaskText: TextBox
+      - portText: TextBox
+      - savePathText: TextBox
+      - serverText: TextBox
+      - messageHistoryRichText: RichTextBox
+      - btnStart: Button
+      - btnStop: Button
+      - btnSavePath: Button
+      - btnSend: Button
+      + Form1()
+      + Form1_Load(sender: object, e: EventArgs)
+      + btnStart_Click(sender: object, e: EventArgs)
+      + btnSavePath_Click(sender: object, e: EventArgs)
+      + btnStop_Click(sender: object, e: EventArgs)
+      + btnSend_Click(sender: object, e: EventArgs)
+      + LoadConfigData()
+      + SaveConfigData()
+      + isValidEntry() : bool
+      + StartServerThread()
+      + serverText_Enter(sender: object, e: EventArgs)
+      + serverText_Leave(sender: object, e: EventArgs)
+    }
+    
+    class Program {
+      + Main()
+    }
+    
+    '------------------------------------------------------------
+    ' Networking and File I/O Classes (Server, Clients, Helpers)
+    '------------------------------------------------------------
+    class SocketHandler {
+      - m_serverEndPoint: IPEndPoint
+      - m_serverSocket: Socket
+      - m_port: int
+      - m_clientNum: int
+      - m_clientSocketList: List<Socket>
+      - m_ipAdd: string
+      - m_isServerRunning: bool
+      - m_statusMessage: string
+      + Instance: SocketHandler {static}
+      + SocketHandler(port: int, ipAdd: string)
+      + StartServer(uiParams: CommonParams) : bool
+      + TestMessageSendToClient(socket: Socket) : bool
+      + MessageSendToClient(clientParams: ClientThreadParams) : bool
+      + GetClientSockets : ReadOnlyCollection<Socket>
+      {static} + StopServer()
+      - Shutdown()
+      - HandleClient(parameters: object)
+      - ReceiveFile(clientParam: ClientThreadParams) : bool
+    }
+    
+    class ClientThreadParams {
+      + ClientSocket: Socket
+      + StatusText: TextBox
+      + SavePathText: TextBox
+      + ServerText: TextBox
+      + ClientNumber: int
+      + ChatLogRichText: RichTextBox
+      + ClientThreadParams(clientSocket: Socket, statusText: TextBox, savePathText: TextBox, clientNumber: int, chatLogRichText: RichTextBox, serverText: TextBox)
+      + GetSocketHandle() : int
+    }
+    
+    class CommonParams {
+      + StatusText: TextBox
+      + SavePathText: TextBox
+      + ChatLogRichText: RichTextBox
+      + ServerText: TextBox
+      + CommonParams(statusText: TextBox, savePathText: TextBox, chatLogRichText: RichTextBox, serverText: TextBox)
+    }
+    
+    class AppTimeOpen {
+      + GetTimestampedSavePath(savePath: string) : string
+    }
+    
+    class FileMutexWrapper {
+      + fileMutex: Mutex {static}
+    }
+    
+    class TextBoxHelper {
+      + GetTextThreadSafe(textBox: TextBox) : string {static}
+    }
+    
+    class FileWriter {
+      + WriteBufferToFile(textboxFilePath: TextBox, buffer: byte[], bytesRead: int) : bool {static}
+    }
+    
+    '-------------------------------
+    ' Helper Classes in Form1
+    '-------------------------------
+    class ButtonHandler << (S,orchid) >> {
+      + StartButtonActive(btnStart: Button, isEnable: bool)
+      + StopButtonActive(btnStop: Button, isEnable: bool)
+      + SendButtonActive(btnSend: Button, isEnable: bool)
+      + StartStopPathActive(btnStart: Button, btnStop: Button, btnSavePath: Button, btnSend: Button, isEnable: bool)
+    }
+    
+    class StatusUpdater << (S,orchid) >> {
+      + TextBoxUpdater(message: string, statusText: TextBox)
+    }
+    
+    class MessageLogger << (S,orchid) >> {
+      + MessageHistoryLog(chatLogRichText: RichTextBox, dataStr: string, clearMessageLog: bool)
+    }
+    
+    class TextBox_FontColorUpdater << (S,orchid) >> {
+      + SetTextBox_FontColor(textBox: TextBox)
+      + SetTextBox_FontColor(textBox: TextBox, color: Color)
+    }
+    
+    class RichTextBox_FontColorUpdater << (S,orchid) >> {
+      + SetRichTextBox_FontColor(richText: RichTextBox)
+    }
+    
+    class DefaultItems << (S,orchid) >> {
+      - m_statusDefaultText: string
+      - m_messageToSend: string
+      + StatusDefaultText: string
+      + MessageToSend: string
+      + InitializeMessageToClient(textBox: TextBox)
+    }
+    
+    '----------------------------------------
+    ' Validation Flow Subsystem (Input Checks)
+    '----------------------------------------
+    package "Validation Flow" {
+    
+      ' Base abstract class for all validation blocks.
+      abstract class ValidationBlock {
+         {abstract} + Execute(input: InputHandler, out errorMessage: string) : bool
+         + NextBlocks(success: bool) : List<ValidationBlock>
+         + AddOnSuccess(block: ValidationBlock)
+         + AddOnFailure(block: ValidationBlock)
+      }
+      
+      ' Concrete validation blocks
+      class IpNotEmptyBlock {
+         + Execute(input: CustomInput, out errorMessage: string) : bool
+      }
+      
+      class ValidIpFormatBlock {
+         + Execute(input: CustomInput, out errorMessage: string) : bool
+         + SetNextSuccess(block: ValidationBlock)
+         + SetNextFailure(block: ValidationBlock)
+         + NextBlocks(success: bool) : List<ValidationBlock>
+      }
+      
+      class PortNotEmptyBlock {
+         + Execute(input: CustomInput, out errorMessage: string) : bool
+      }
+      
+      class PathNotEmptyBlock {
+         + Execute(input: CustomInput, out errorMessage: string) : bool
+      }
+      
+      class PortIsValid {
+         + Execute(input: CustomInput, out errorMessage: string) : bool
+      }
+      
+      class PathIsValid {
+         + Execute(input: CustomInput, out errorMessage: string) : bool
+      }
+      
+      class TestingOfMyBranch {
+         + Execute(input: CustomInput, out errorMessage: string) : bool
+      }
+      
+      ' Validation Flow properties and input handling
+      'enum FocusPosition {
+      '   IP
+      '   PORT
+      '   PATH
+      '   DEFAULT
+      '}
+      
+      abstract class InputHandler {
+         + serverName : string
+      }
+      
+      class CustomInputParameters {
+         + Ip: string
+         + Port: string
+         + FilePath: string
+         + IpMaskedTextBox: MaskedTextBox
+      }
+      
+      class CustomInput {
+         + CustomInput(parameters: CustomInputParameters)
+         + IpAddress : string
+         + PortStr : string
+         + FilePath : string
+         + LastPosFocus : FocusPosition
+         + serverName : string
+      }
+
+      ' Validation Flow builder and configuration
+      class ValidationFlowBuilder {
+        + AddBlock(id: string, block: ValidationBlock)
+        + SetTransition(fromId: string, onSuccessId: string, onFailureId: string)
+        + Build() : ValidationBlock
+      }
+      
+      class ValidationFlowConfig {
+        + SetupValidationBlocks() : List<ValidationBlock>
+      }
+
+      ' Flow Processor that executes the validation blocks
+      class FlowProcessor << (S,orchid) >> {
+        + RunFlow(start: ValidationBlock, input: InputHandler, ref errorMessage: string, maxIterations: int)
+      }
+
+      ' Note: ValidationBlock and its concrete implementations (not fully shown here)
+      abstract class ValidationBlock {
+        {abstract} + Execute(input: InputHandler, out errorMessage: string) : bool
+        + NextBlocks(success: bool) : List<ValidationBlock>
+        + AddOnSuccess(block: ValidationBlock)
+        + AddOnFailure(block: ValidationBlock)
+      }
+
+      ' Inheritance relationships within validation flow
+      ValidationBlock <|-- IpNotEmptyBlock
+      ValidationBlock <|-- ValidIpFormatBlock
+      ValidationBlock <|-- PortNotEmptyBlock
+      ValidationBlock <|-- PathNotEmptyBlock
+      ValidationBlock <|-- PortIsValid
+      ValidationBlock <|-- PathIsValid
+      ValidationBlock <|-- TestingOfMyBranch
+      
+    }
+    
+    '-----------------------------------------------
+    ' Relationships between Major Components
+    '-----------------------------------------------
+    Program --> Form1 : creates instance
+
+    Form1 --> SocketHandler : uses
+    Form1 ..> ButtonHandler
+    Form1 ..> StatusUpdater
+    Form1 ..> MessageLogger
+    Form1 ..> TextBox_FontColorUpdater
+    Form1 ..> RichTextBox_FontColorUpdater
+    Form1 ..> DefaultItems
+    Form1 --> "Validation Flow" : triggers isValidEntry()\n(uses CustomInput & FlowProcessor)
+    Form1 ..> ClientSelectionForm : uses
+
+    InputHandler <|-- CustomInput : inherits
+    CustomInputParameters --> CustomInput : used to create
+    ValidationFlowBuilder --> ValidationBlock
+    ValidationFlowConfig --> ValidationFlowBuilder : uses
+    ValidationFlowConfig ..> FlowProcessor : provides start block ' ValidationFlowConfig returns the starting block used by FlowProcessor.
+    FlowProcessor <.. InputHandler : uses ' FlowProcessor accepts a CustomInput instance via InputHandler
+
+    SocketHandler "1" --> "0..*" ClientThreadParams : manages
+    SocketHandler --> CommonParams : utilizes
+    SocketHandler --> FileWriter : writes data using
+    ClientThreadParams ..> StatusUpdater
+    ClientThreadParams ..> MessageLogger : provides ChatLogRichText for logging
+    FileWriter ..> FileMutexWrapper : uses for synchronization
+    FileWriter ..> TextBoxHelper : uses for thread-safe file path retrieval
+    FileWriter ..> AppTimeOpen : uses for timestamped path generation
+  
+}
+@enduml
