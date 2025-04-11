@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Ipv4SocketCommunication/1.0.0": {
+        "runtime": {
+          "Ipv4SocketCommunication.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Ipv4SocketCommunication/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

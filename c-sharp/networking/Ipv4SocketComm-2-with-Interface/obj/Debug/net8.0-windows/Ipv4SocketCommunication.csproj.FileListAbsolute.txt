@@ -1,0 +1,17 @@
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\bin\Debug\net8.0-windows\Ipv4SocketCommunication.exe
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\bin\Debug\net8.0-windows\Ipv4SocketCommunication.deps.json
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\bin\Debug\net8.0-windows\Ipv4SocketCommunication.runtimeconfig.json
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\bin\Debug\net8.0-windows\Ipv4SocketCommunication.dll
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\bin\Debug\net8.0-windows\Ipv4SocketCommunication.pdb
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\obj\Debug\net8.0-windows\Ipv4SocketCommunication.Form1.resources
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\obj\Debug\net8.0-windows\Ipv4SocketCommunication.csproj.GenerateResource.cache
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\obj\Debug\net8.0-windows\Ipv4SocketCommunication.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\obj\Debug\net8.0-windows\Ipv4SocketCommunication.AssemblyInfoInputs.cache
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\obj\Debug\net8.0-windows\Ipv4SocketCommunication.AssemblyInfo.cs
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\obj\Debug\net8.0-windows\Ipv4SocketCommunication.csproj.CoreCompileInputs.cache
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\obj\Debug\net8.0-windows\Ipv4SocketCommunication.dll
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\obj\Debug\net8.0-windows\refint\Ipv4SocketCommunication.dll
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\obj\Debug\net8.0-windows\Ipv4SocketCommunication.pdb
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\obj\Debug\net8.0-windows\Ipv4SocketCommunication.genruntimeconfig.cache
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\obj\Debug\net8.0-windows\ref\Ipv4SocketCommunication.dll
+C:\Users\RTE\source\repos\zaldy\csharp\Ipv4SocketCommunication\obj\Debug\net8.0-windows\Ipv4SocketCommunication.ClientSelectionForm.resources
